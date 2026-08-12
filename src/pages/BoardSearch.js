@@ -172,7 +172,7 @@ class BoardSearch extends Component {
                 const playtesters = this.getGameValue(board, 'playtesters') || [];
                 const boardPlaytesters = playtesters.map(pt => pt.stringValue.toLowerCase());
 
-                if (selectedPlayers.some(player => boardPlaytesters.some(tester => tester.includes(player))))
+                if (selectedPlayers.some(player => boardPlaytesters.some(tester => tester.includes(player))) || boardPlaytesters.some(player => selectedPlayers.some(p => p.includes(player))))
                     return false;
             }
 
