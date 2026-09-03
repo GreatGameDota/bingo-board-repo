@@ -97,6 +97,16 @@ class BoardCard extends Component {
         return parts.join(";");
     }
 
+    removeShelter = (boardString) => {
+        const parts = boardString.split(";");
+        if (parts.length === 2)
+            parts.splice(1, 0, "random");
+        if (parts.length === 3)
+            parts.splice(1, 0, "1"); // not rlly needed
+        parts[2] = "random";
+        return parts.join(";");
+    }
+
     render() {
         const { board, fake } = this.props;
         const displayBoardString = fake ? this.getModifiedBoardString() : this.getGameValue(board, "boardString");
@@ -122,7 +132,7 @@ class BoardCard extends Component {
                         <p style={{ fontFamily: "RainWorldRodondo", fontSize: "32px" }}>{this.getGameValue(board, 'playtesters').map((name, index) => name.stringValue).join(', ')}</p>
                     </Fragment>)} */}
                     <button
-                        onClick={() => navigator.clipboard.writeText(displayBoardString)}
+                        onClick={() => navigator.clipboard.writeText(this.removeShelter(displayBoardString))}
                         className={`p-2 px-4 my-8 mx-auto flex flex-row w-fit text-gray-400 rounded hover:bg-gray-700 transition-colors border border-gray-700`}
                         style={{ fontFamily: "RainWorldRodondo", fontSize: "24px" }}
                     >
